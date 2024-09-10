@@ -3,15 +3,14 @@
 CSS TABLE OF CONTENTS
 
 # GLOBAL STYLES
-    # BLOBAL VARIABLES
+    # GLOBAL VARIABLES
     # GLOBAL RESET
     # GLOBAL COLORS
     # GLOBAL TYPOGRAPHY
-
-
+    # GLOBAL MEDIA
 
 ------------------------------------------------------------------------------------------------------------------------------
- */
+
 
  /* GLOBAL VARIABLES */
 
@@ -30,12 +29,64 @@ CSS TABLE OF CONTENTS
  }
 
 
+
 /* GLOBAL RESET */
 
-    /* REMOVE THE DEFAULT 8px MARGIN ON THE BODY */
-    body {
-        margin: 0; 
-        }
+/* REMOVE THE DEFAULT 8px MARGIN ON THE BODY */
+body {
+    margin: 0; 
+}
+
+/* CHANGE BOX-SIZING TO BORDER-BOX */
+* {
+    box-sizing: border-box;
+}
+
+
+
+ /* GLOBAL COLORS */
+
+body {
+
+    /* SET THE COLOR OF THE MAIN BODY BACKGROUND */
+    background-color: var(--color-body-background);
+
+    /* SET THE COLOR OF THE MAIN BODY TEXT */
+    color: var(--color-text-body);
+
+    }
+
+
+
+h1, h2, h3 {
+
+    /* SET THE COLOR OF ALL THE HEADINGS H1-etc */
+    color: var(--color-text-headings);
+
+}
+
+a {
+    /* SET THE COLOR OF ALL TEXT LINKS */
+    color: var(--color-links);
+
+    &:hover {
+        /* SET THE COLOR OF ALL HOVER STATES ON TEXT LINKS */
+        color: var(--color-links-hover);
+    }
+}
+
+/* GLOBAL TYPOGRAPHY */
+
+body {
+
+    /* SET THE FONT FOR ALL MAIN BODY  TEXT */
+    font-family: var(--font-body);
+
+}
+
+h1, h2, h3 {
+    font-family: var(--font-headings);
+}
 
 h1 {
     /* SET H1 FONT SIZE */
@@ -61,62 +112,18 @@ h3 {
     line-height: 1.3;
 }
 
-
- /* GLOBAL COLORS */
-
-body {
-
-    /* SET THE COLOR OF THE MAIN BODY BACKGROUND */
-    background-color: var(--color-body-background);
-
-    /* SET THE COLOR OF THE MAIN BODY TEXT */
-    color: var(--color-text-body);
-
-    /* SET THE LEADING */
-    line-height: 1.5;
-    }
-
-
-
-h1, h2, h3 {
-
-    /* SET THE COLOR OF ALL THE HEADINGS H1-etc */
-    color: var(--color-text-headings);
-
-}
-
-
-a {
-    /* SET THE COLOR OF ALL TEXT LINKS */
-    color: var(--color-links);
-
-    &:hover {
-        /* SET THE COLOR OF ALL HOVER STATES ON TEXT LINKS */
-        color: var(--color-links-hover);
-    }
-}
-
-/* GLOBAL TYPOGRAPHY */
-
-body {
-
-    /* SET THE FONT FOR ALL MAIN BODY  TEXT */
-    font-family: var(--font-body);
-
-}
-
-h1, h2, h3 {
-    font-family: var(--font-headings);
-}
-
-
-
-/* CHANGE BOX-SIZING TO BORDER-BOX */
-* {
-    box-sizing: border-box;
-}
-
 p {
     /* LIMIT THE WIDTH OF ALL PARAGRAPHS TO 65 characters */
     max-width: 65ch;
+}
+
+
+/* GLOBAL MEDIA */
+
+img {
+    /* MAKE ALL IMAGES SHRINK ON SMALL SCREENS */
+    max-width: 100%;
+
+    /* HEIGHT-AUTO ONLY WORKS WHEN THE HTML FOR THE IMAGES HAS A WEIGHT AND HEIGHT MEASUREMENT*/
+    height: auto;
 }
