@@ -16,10 +16,11 @@ CSS TABLE OF CONTENTS
 
 # SITE STRUCTURE
     # HEADER
-        #LOGO
-        #SITE NAV
+        # LOGO
+        # SITE NAV
     # MAIN
-        #SECIONS
+        # SECIONS
+            # HERO
     #FOOTER
 
 ------------------------------------------------------------------------------------------------------------------------------
@@ -34,6 +35,9 @@ CSS TABLE OF CONTENTS
     --color-text-headings: rgb(255 255 255 / 1);
     --color-links: rgb(255 230 0 / 1);
     --color-links-hover: rgb(255 255 0 /1);
+    --color-siteheader-background: transparent;
+    --color-siteheader-links: rgb(255 255 255);
+    --color-hero-background: rgb(100 100 100);
 
     /* DEFINE ALL FONTS USED HERE */
     --font-body: Helvetica, Arial, sans-serif;
@@ -43,7 +47,7 @@ CSS TABLE OF CONTENTS
     --container-width: 1200px;
     --unit-small: 1em;
     --unit-medium: 2em;
-    --units-large: 4em;
+    --unit-large: 4em;
  }
 
 
@@ -148,6 +152,14 @@ img {
     height: auto;
 }
 
+/* GLOBAL HELPERS */
+
+/* HIDE ELEMENTS VISUALLY BUT NOT FROM SCREEN READERS AND SEARCH ENGINES */
+.hide-visually {
+    position: absolute;
+    top: -9999px;
+    left: -9999px;
+}
 
 /* --------------------- */
 /* -------LAYOUT-------- */
@@ -247,7 +259,11 @@ body {
     .push-10 {grid-column-start: 11;}
     .push-11 {grid-column-start: 12;}
 
+    /* SWAP (REVERSE) COLUMNS WORKS ONLY W/ 2 CHILDREN */
+    .row.swapped > *:first-child { order: 2;}
+    .row.swapped > *:last-child { order: 1;}
 }
+
 
 /* FOR DEMO PURPOSES */
 
@@ -264,22 +280,83 @@ body {
 
 
 /* SITE HEADER */
+
 .site-header {
-    background-color: pink;
+    background-color: var(--color-siteheader-background);
     /* PUT ALL HEADER CHILDREN SIDE-BY-SIDE */
     display: flex;
     justify-content: space-between;
+    align-items: center;
 
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE HEADER */
     padding: var(--unit-small);
+
+    /* RENDER HEADER ON TOP OF HERO */
+    position: absolute;
+    width: 100%;
+
+    /* REMOVE LINK UNDERLINES AND SET SITE HEADER LINK COLOR */
+    a {
+        color: var(--color-siteheader-links);
+        text-decoration: none;
+    }
+
+    /* SITE LOGO */
+    .site-logo {
+        /* PUT SITE LOGO CHILDREN SIDE-BY-SIDE AND CENTER */
+        display: flex;
+        align-items: center;
+        gap: 1em;
+
+        /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
+        h1 {
+            font-size: 2em;
+            margin: 0;
+            text-wrap: no-wrap;
+        }
+    }
+
+    
+    /* SITE NAV */
+    .site-nav {
+
+        ul {
+            /* REMOVE MARGINS & BULLETS FROM LIST */
+            margin: 0;
+            list-style: none;
+
+            /* DISPLAY CHILDREN SIDE-BY-SIDE */
+            display: flex;
+            gap: 1em;
+
+        }
+        
+        /* MAKE SITE NAV LINKS BIG LIKE BUTTONS */
+        a {
+            display: block;
+            padding: 1em;
+            background-color: var(color-siteheader-links);
+        }
+
+    }
+
 }
+
+
 
 /* SITE MAIN */
-.site-main {
-}
 
+/* SECTIONS */
 section {
     padding: var(--unit-large) var(--unit-small);
+}
+
+/* HERO */
+.hero {
+    background: var(--color-hero-background);
+
+    /*  ADD MORE SPACE ON TOP FOR THE ABSOLUTE HEADER */
+    padding-top: calc(4em + var(--unit-large));
 }
 
 /* SITE FOOTER */
