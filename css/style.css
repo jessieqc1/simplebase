@@ -33,11 +33,12 @@ CSS TABLE OF CONTENTS
     --color-body-background: rgb(0 0 0);
     --color-text-body: rgb(255 255 255 / .8);
     --color-text-headings: rgb(255 255 255 / 1);
-    --color-links: rgb(255 230 0 / 1);
-    --color-links-hover: rgb(255 255 0 /1);
+    --color-links: rgb(255 255 255 / .8);
+    --color-links-hover: rgb(255 255 255 / 1);
     --color-siteheader-background: transparent;
     --color-siteheader-links: rgb(255 255 255);
     --color-hero-background: rgb(100 100 100);
+    --color-sitefooter-background: rgb(100 100 100);
 
     /* DEFINE ALL FONTS USED HERE */
     --font-body: Helvetica, Arial, sans-serif;
@@ -283,17 +284,22 @@ body {
 
 .site-header {
     background-color: var(--color-siteheader-background);
-    /* PUT ALL HEADER CHILDREN SIDE-BY-SIDE */
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+
+    /* PUT ALL HEADER CHILDREN SIDE-BY-SIDE AND CENTER ON LARGE SCREENS */
+    @media (min-width: 768px) {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
 
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE HEADER */
     padding: var(--unit-small);
 
     /* RENDER HEADER ON TOP OF HERO */
-    position: absolute;
-    width: 100%;
+    @media (min-width: 768px) {
+        position: absolute;
+        width: 100%;
+    }
 
     /* REMOVE LINK UNDERLINES AND SET SITE HEADER LINK COLOR */
     a {
@@ -303,10 +309,12 @@ body {
 
     /* SITE LOGO */
     .site-logo {
-        /* PUT SITE LOGO CHILDREN SIDE-BY-SIDE AND CENTER */
+        /* PUT SITE LOGO CHILDREN SIDE-BY-SIDE */
         display: flex;
         align-items: center;
         gap: 1em;
+
+        
 
         /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
         h1 {
@@ -323,22 +331,23 @@ body {
         ul {
             /* REMOVE MARGINS & BULLETS FROM LIST */
             margin: 0;
+            padding: 0;
             list-style: none;
 
-            /* DISPLAY CHILDREN SIDE-BY-SIDE */
+            /* DISPLAY CHILDREN SIDE-BY-SIDE ON LARGE SCREENS */
+            @media (min-width: 768px) {
             display: flex;
-            gap: 1em;
-
+            }
         }
         
         /* MAKE SITE NAV LINKS BIG LIKE BUTTONS */
         a {
             display: block;
             padding: 1em;
-            background-color: var(color-siteheader-links);
         }
 
     }
+
 
 }
 
@@ -361,7 +370,17 @@ section {
 
 /* SITE FOOTER */
 .site-footer {
-    background-color: skyblue;
+    background-color: var(--color-sitefooter-background);
+
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE FOOTER */
     padding: var(--unit-small);
+
+    .site-nav {
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
 }
