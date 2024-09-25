@@ -1,4 +1,6 @@
-/* ------------------------------------------------------------------------------------------------------------------------------
+/* ----------------------------
+-------------------------------
+-------------------------------
 
 CSS TABLE OF CONTENTS
 
@@ -8,6 +10,7 @@ CSS TABLE OF CONTENTS
     # GLOBAL COLORS
     # GLOBAL TYPOGRAPHY
     # GLOBAL MEDIA
+    # GLOBAL HELPERS
 
 #LAYOUT
     # MEDIA QUERIES / BREAKPOINTS
@@ -23,49 +26,65 @@ CSS TABLE OF CONTENTS
             # HERO
     #FOOTER
 
-------------------------------------------------------------------------------------------------------------------------------
+# UI COMPONENTS
+    # BUTTONS
+    # CARDS
 
 
- /* GLOBAL VARIABLES */
+-------------------------------------
+-------------------------------------
+-------------------------------------
+
+/* ---------------------- */
+/* ------- GLOBALS ------ */
+/* ---------------------- */
+
+/* GLOBAL VARIABLES */
 
  :root {
 
-    --color-body-background: rgb(0 0 0);
-    --color-text-body: rgb(255 255 255 / .8);
-    --color-text-headings: rgb(255 255 255 / 1);
-    --color-links: rgb(255 255 255 / .8);
-    --color-links-hover: rgb(255 255 255 / 1);
+    /* DEFINE ALL COMMONLY USED COLORS HERE */
+    --color-body-background: rgb(255 255 255);
+    --color-text-body: rgb(0 0 0 / .8);
+    --color-text-headings: rgb(0 0 0 / 1);
+
+    --color-links-dark: rgb(102 102 102);
+    --color-links-darker: rgba(0 0 0);
+    --color-links-light: rgb(204 204 204);
+    --color-links-lighter: rgba(255 255 255);
+
     --color-siteheader-background: transparent;
     --color-siteheader-links: rgb(255 255 255);
+
     --color-hero-background: rgb(100 100 100);
+    --color-hero-text: rgb(255 255 255 / .8);
+    --color-hero-headings: rgb(255 255 255 /1);
+
     --color-sitefooter-background: rgb(100 100 100);
+    --color-sitefooter-text: rgb(255 255 255 / .8);
+    --color-site-footer-headings: rgb(255 255 255 / 1);
+    --color-sitefooter-links: rgb(255 255 255);
 
     /* DEFINE ALL FONTS USED HERE */
-    --font-body: Helvetica, Arial, sans-serif;
-    --font-headings: Georgia, serif;
+    --font-body: system-ui, Helvetica, Arial, sans-serif;
+    --font-headings: system-ui, Helvetica, Arial, sans-serif;
 
     /* SIZING UNITS */
-    --container-width: 1200px;
+    --container-width: 1100px;
     --unit-small: 1em;
     --unit-medium: 2em;
     --unit-large: 4em;
+
+
  }
-
-
 
 /* GLOBAL RESET */
 
+/* CHANGE BOX-SIZING FOR ALL TO BORDER-BOX */
+* { box-sizing: border-box; }
+
 /* REMOVE THE DEFAULT 8px MARGIN ON THE BODY */
-body {
-    margin: 0; 
-}
-
-/* CHANGE BOX-SIZING TO BORDER-BOX */
-* {
-    box-sizing: border-box;
-}
-
-
+body { margin: 0; }
 
  /* GLOBAL COLORS */
 
@@ -77,38 +96,41 @@ body {
     /* SET THE COLOR OF THE MAIN BODY TEXT */
     color: var(--color-text-body);
 
-    }
-
-
+}
 
 h1, h2, h3 {
-
     /* SET THE COLOR OF ALL THE HEADINGS H1-etc */
     color: var(--color-text-headings);
-
 }
 
 a {
     /* SET THE COLOR OF ALL TEXT LINKS */
     color: var(--color-links);
 
+    /* SET THE COLOR OF ALL HOVER STATES ON TEXT LINKS */
     &:hover {
-        /* SET THE COLOR OF ALL HOVER STATES ON TEXT LINKS */
         color: var(--color-links-hover);
     }
+
 }
 
 /* GLOBAL TYPOGRAPHY */
 
 body {
 
-    /* SET THE FONT FOR ALL MAIN BODY  TEXT */
+    /* SET THE FONT FOR ALL MAIN BODY TEXT */
     font-family: var(--font-body);
+
+    /* SET THE LEADING (LINE-HEIGHT) FOR ALL BODY TEXT */
+    line-height: 1.4;
 
 }
 
 h1, h2, h3 {
+
+    /* SET THE FONT FOR ALL HEADINGS */
     font-family: var(--font-headings);
+
 }
 
 h1 {
@@ -119,38 +141,41 @@ h1 {
     line-height: 1;
 }
 
+
 h2 {
-    /* SET H1 FONT SIZE */
+    /* SET H2 FONT SIZE */
     font-size: 2em;
 
-    /* SET H1 LEADING */
+    /* SET H2 LEADING */
     line-height: 1.2;
 }
 
+
 h3 {
-    /* SET H1 FONT SIZE */
+    /* SET H3 FONT SIZE */
     font-size: 1.5em;
 
-    /* SET H1 LEADING */
+    /* SET H3 LEADING */
     line-height: 1.3;
 }
+
 
 p {
     /* LIMIT THE WIDTH OF ALL PARAGRAPHS TO 65 characters */
     max-width: 65ch;
+
     /* TEXT WRAP TO AVOID WIDOWS AND ORPHANS */
     text-wrap: pretty;
-}
 
+}
 
 /* GLOBAL MEDIA */
 
 img {
+
     /* MAKE ALL IMAGES SHRINK ON SMALL SCREENS */
     max-width: 100%;
-
-    /* HEIGHT-AUTO ONLY WORKS WHEN THE HTML FOR THE IMAGES HAS A WEIGHT AND HEIGHT MEASUREMENT*/
-    height: auto;
+    height: auto; /* ONLY WORKS WHEN IMG HTML HAS A WEIGHT AND HEIGHT SET */
 }
 
 /* GLOBAL HELPERS */
@@ -162,6 +187,15 @@ img {
     left: -9999px;
 }
 
+@media (max-width: 767px) {
+    .hide-visually-smallonly {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+}
+
+
 /* --------------------- */
 /* -------LAYOUT-------- */
 /* --------------------- */
@@ -170,10 +204,9 @@ img {
 
 /* SMALL SCREENS (Mobile < 768px) */
 body {
-    /* SET THE DEFAULT FONT SIZE TO 14px (the browser's default setting is 16px at 100%. THIS LINE OF CODE IS MOBILE-FIRST DESIGN) */
+    /* SET DEFAULT FONT SIZE TO 14px ( browser's default is 16px at 100%. */
     font-size: 87.5%;
 }
-
 
 /* MEDIUM SCREENS (768px < Tablets < 1200px) */
 @media (min-width: 768px) {
@@ -183,9 +216,7 @@ body {
     }
 }
 
-
 /* LARGE SCREENS (1200 px < Laptops & Desktops) */
-
 @media (min-width: 1200px) {
     body {
         /* SET THE MEDIUM SCREENS AND HGHER FONT SIZE TO 16px */
@@ -194,16 +225,16 @@ body {
 }
 
 /* CONTAINER */
-
 .container {
     /* SET THE MAX WIDTH OF YOUR SITE (eg 1200px) */
     max-width: var(--container-width);
+
+    /* CENTER THE CONTAINER HORIZONTALLY */
     margin-left: auto;
     margin-right: auto;
 }
 
 /* GRID */
-
 .row {
     --gridgap: 1em;
 }
@@ -225,8 +256,6 @@ body {
     .two-thirds {grid-column: auto / span 8;}
     .one-fourth {grid-column: auto / span 3;}
     .three-fourths {grid-column: auto / span 9;}
-
-
 
     /* 12 COLUMN CLASSES */
     .col-1 {grid-column: auto / span 1;}
@@ -261,10 +290,10 @@ body {
     .push-11 {grid-column-start: 12;}
 
     /* SWAP (REVERSE) COLUMNS WORKS ONLY W/ 2 CHILDREN */
-    .row.swapped > *:first-child { order: 2;}
-    .row.swapped > *:last-child { order: 1;}
-}
+    .row.swapped > *:first-child { order: 2; }
+    .row.swapped > *:last-child { order: 1; }
 
+}
 
 /* FOR DEMO PURPOSES */
 
@@ -274,14 +303,11 @@ body {
     text-align: center;
 }
 
-/* --------------------- */
-/* ---SITE STRUCTURE --- */
-/* --------------------- */
-
-
+/* ---------------------- */
+/* --- SITE STRUCTURE --- */
+/* ---------------------- */
 
 /* SITE HEADER */
-
 .site-header {
     background-color: var(--color-siteheader-background);
 
@@ -295,11 +321,12 @@ body {
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE HEADER */
     padding: var(--unit-small);
 
-    /* RENDER HEADER ON TOP OF HERO */
+    /* RENDER HEADER ON TOP OF HERO ON LARGE SCREENS*/
     @media (min-width: 768px) {
         position: absolute;
         width: 100%;
     }
+
 
     /* REMOVE LINK UNDERLINES AND SET SITE HEADER LINK COLOR */
     a {
@@ -309,12 +336,11 @@ body {
 
     /* SITE LOGO */
     .site-logo {
-        /* PUT SITE LOGO CHILDREN SIDE-BY-SIDE */
+
+        /* PUT SITE LOGO CHILDREN SIDE-BY-SIDE AND CENTER*/
         display: flex;
         align-items: center;
         gap: 1em;
-
-        
 
         /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
         h1 {
@@ -324,7 +350,6 @@ body {
         }
     }
 
-    
     /* SITE NAV */
     .site-nav {
 
@@ -336,8 +361,9 @@ body {
 
             /* DISPLAY CHILDREN SIDE-BY-SIDE ON LARGE SCREENS */
             @media (min-width: 768px) {
-            display: flex;
+                display: flex;
             }
+
         }
         
         /* MAKE SITE NAV LINKS BIG LIKE BUTTONS */
@@ -351,35 +377,101 @@ body {
 
 }
 
-
-
 /* SITE MAIN */
+.site-main {
+}
 
 /* SECTIONS */
 section {
     padding: var(--unit-large) var(--unit-small);
 }
 
-/* HERO */
+/* HERO SECTION*/
+
 .hero {
     background: var(--color-hero-background);
+    color: var(--color-hero-text);
 
     /*  ADD MORE SPACE ON TOP FOR THE ABSOLUTE HEADER */
     padding-top: calc(4em + var(--unit-large));
+
+    h1, h2, h3 {
+        color: var(--color-hero-headings);
+    }
+
 }
 
 /* SITE FOOTER */
 .site-footer {
     background-color: var(--color-sitefooter-background);
+    color: var(--color-sitefooter-text);
 
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE FOOTER */
     padding: var(--unit-small);
+
+    h1, h2, h3 {
+        color: var(--color-sitefooter-headings);
+    }
+
+    a {
+        color: var(--color-links-light);
+
+        &:hover {
+            color: var(--color-links-lighter);
+        }
+    }
 
     .site-nav {
         ul {
             list-style: none;
             margin: 0;
             padding: 0;
+        }
+    }
+
+}
+
+
+/* ------------------- */
+/* ---UI COMPONENTS--- */
+/* ------------------- */
+
+/* BUTTONS */
+
+.button {
+    /*  SET THE BUTTON COLORS */
+    border: 1px solid var(--color-links-dark);
+    background-color: var(--color-links-dark);
+    color: white;
+    
+    /* ENABLE BOX MODEL STYLING  */
+    display: inline-block;
+    padding: var(--unit-small);
+    margin: var(--unit-small);
+    
+    /* GET RID OF THE UNDERLINE */
+    text-decoration: none;
+
+    /* TO ADD MARGIN BETWEEN A BUTTON THAT IMMEDIATELY FOLLOWS ANOTHER BUTTON, USING NESTING SYNTAX */
+    + .button {
+        margin-left: var(--unit-small);
+    }
+
+    &:hover {
+        color: #fff;
+        background-color: var(--color-links-darker);
+        border-color: var(--color-links-darker);
+    }
+
+/* LIGHT BUTTON VARIANT */
+    &.light {
+        border-color: var(--color-links-light);
+        background-color: var(--color-links-light);
+        color: var(--color-links-darker);
+
+        &:hover {
+            border-color: var(--color-links-lighter);
+            background-color: var(--color-links-lighter);
         }
     }
 
