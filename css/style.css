@@ -21,6 +21,7 @@ CSS TABLE OF CONTENTS
     # HEADER
         # LOGO
         # SITE NAV
+        # SITE-HEADER-ON-TOP-OF-HERO
     # MAIN
         # SECIONS
             # HERO
@@ -41,7 +42,7 @@ CSS TABLE OF CONTENTS
 
 /* GLOBAL VARIABLES */
 
- :root {
+:root {
 
     /* DEFINE ALL COMMONLY USED COLORS HERE */
     --color-body-background: rgb(255 255 255);
@@ -76,7 +77,7 @@ CSS TABLE OF CONTENTS
     --unit-large: 4em;
 
 
- }
+}
 
 /* GLOBAL RESET */
 
@@ -84,11 +85,10 @@ CSS TABLE OF CONTENTS
 * { box-sizing: border-box; }
 
 /* REMOVE THE DEFAULT 8px MARGIN ON THE BODY */
-body { margin: 0; }
+body { 
+    margin: 0; 
 
  /* GLOBAL COLORS */
-
-body {
 
     /* SET THE COLOR OF THE MAIN BODY BACKGROUND */
     background-color: var(--color-body-background);
@@ -241,6 +241,7 @@ body {
 
 .row > * {
     margin-bottom: var(--gridgap);
+    margin-top: var(--gridgap);
 }
 
 @media (min-width: 768px) {
@@ -321,18 +322,11 @@ body {
     /* ADD SOME GENERAL SPACING/PADDING AROUND THE HEADER */
     padding: var(--unit-small);
 
-    /* RENDER HEADER ON TOP OF HERO ON LARGE SCREENS*/
-    @media (min-width: 768px) {
-        position: absolute;
-        width: 100%;
-    }
-
-
-    /* REMOVE LINK UNDERLINES AND SET SITE HEADER LINK COLOR */
+    /* REMOVE LINK UNDERLINES IN HEADER */
     a {
-        color: var(--color-siteheader-links);
         text-decoration: none;
     }
+
 
     /* SITE LOGO */
     .site-logo {
@@ -341,6 +335,7 @@ body {
         display: flex;
         align-items: center;
         gap: 1em;
+        justify-content: center;
 
         /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
         h1 {
@@ -348,6 +343,7 @@ body {
             margin: 0;
             text-wrap: no-wrap;
         }
+
     }
 
     /* SITE NAV */
@@ -358,11 +354,9 @@ body {
             margin: 0;
             padding: 0;
             list-style: none;
-
-            /* DISPLAY CHILDREN SIDE-BY-SIDE ON LARGE SCREENS */
-            @media (min-width: 768px) {
-                display: flex;
-            }
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
 
         }
         
@@ -372,10 +366,33 @@ body {
             padding: 1em;
         }
 
-    }
-
+    }  
 
 }
+
+
+/* PLACE SITE HEADER ON TOP OF HERO */
+.site-header.on-top-of-hero {
+
+    /* RENDER HEADER ON TOP OF HERO ON LARGE SCREENS*/
+    @media (min-width: 768px) {
+        position: absolute;
+        width: 100%;
+
+        /* SET SITE HEADER LINK COLOR ON LARGE SCREENS*/
+        a {
+            color: var(--color-siteheader-links);
+        }
+
+        /* ADD MORE SPACE ON TOP FOR THE ABSOLUTE HEADER */
+        & + .site-main > .hero {
+            padding-top: calc(4em + var(--unit-large));
+        }
+    }
+
+    
+}  
+
 
 /* SITE MAIN */
 .site-main {
@@ -391,9 +408,6 @@ section {
 .hero {
     background: var(--color-hero-background);
     color: var(--color-hero-text);
-
-    /*  ADD MORE SPACE ON TOP FOR THE ABSOLUTE HEADER */
-    padding-top: calc(4em + var(--unit-large));
 
     h1, h2, h3 {
         color: var(--color-hero-headings);
@@ -447,7 +461,7 @@ section {
     /* ENABLE BOX MODEL STYLING  */
     display: inline-block;
     padding: var(--unit-small);
-    margin: var(--unit-small);
+    margin: var(--unit-small) 0;
     
     /* GET RID OF THE UNDERLINE */
     text-decoration: none;
