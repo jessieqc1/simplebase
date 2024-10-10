@@ -24,13 +24,17 @@ CSS TABLE OF CONTENTS
             # TOGGLE MENU
         # SITE-HEADER-ON-TOP-OF-HERO
     # MAIN
-        # SECIONS
+        # SECTIONS
             # HERO
     #FOOTER
 
 # UI COMPONENTS
     # BUTTONS
-    # CARDS
+
+# ANIMATION
+    # SMOOTH SCROLLING
+
+#CUSTOM STYLING
 
 
 -------------------------------------
@@ -46,9 +50,9 @@ CSS TABLE OF CONTENTS
 :root {
 
     /* DEFINE ALL COMMONLY USED COLORS HERE */
-    --color-body-background: rgb(255 255 255);
-    --color-text-body: rgb(0 0 0 / .8);
-    --color-text-headings: rgb(0 0 0 / 1);
+    --color-body-background: rgb(0, 0, 0);
+    --color-text-body: rgba(255, 255, 255, 0.8);
+    --color-text-headings: rgb(255, 255, 255);
 
     --color-links-dark: rgb(102 102 102);
     --color-links-darker: rgba(0 0 0);
@@ -56,7 +60,7 @@ CSS TABLE OF CONTENTS
     --color-links-lighter: rgba(255 255 255);
 
     --color-siteheader-background: transparent;
-    --color-siteheader-links: rgb(255 255 255);
+    --color-siteheader-links: var(--color-text-headings);
 
     --color-hero-background: rgb(100 100 100);
     --color-hero-text: rgb(255 255 255 / .8);
@@ -99,12 +103,13 @@ body {
 
 }
 
+/* SET THE COLOR OF ALL THE HEADINGS H1-etc */
 h1, h2, h3 {
-    /* SET THE COLOR OF ALL THE HEADINGS H1-etc */
     color: var(--color-text-headings);
 }
 
 a {
+
     /* SET THE COLOR OF ALL TEXT LINKS */
     color: var(--color-links);
 
@@ -116,7 +121,6 @@ a {
 }
 
 /* GLOBAL TYPOGRAPHY */
-
 body {
 
     /* SET THE FONT FOR ALL MAIN BODY TEXT */
@@ -127,39 +131,29 @@ body {
 
 }
 
+/* SET THE FONT FOR ALL HEADINGS */
 h1, h2, h3 {
-
-    /* SET THE FONT FOR ALL HEADINGS */
     font-family: var(--font-headings);
-
+    margin: .4em 0;
 }
 
 h1 {
-    /* SET H1 FONT SIZE */
+    /* SET H1 FONT SIZE AND LEADING */
     font-size: 3em;
-
-    /* SET H1 LEADING */
     line-height: 1.1;
 }
 
-
 h2 {
-    /* SET H2 FONT SIZE */
+    /* SET H2 FONT SIZE AND LEADING */
     font-size: 2em;
-
-    /* SET H2 LEADING */
     line-height: 1.2;
 }
 
-
 h3 {
-    /* SET H3 FONT SIZE */
+    /* SET H3 FONT SIZE AND LEADING*/
     font-size: 1.5em;
-
-    /* SET H3 LEADING */
     line-height: 1.3;
 }
-
 
 p {
     /* LIMIT THE WIDTH OF ALL PARAGRAPHS TO 65 characters */
@@ -172,9 +166,8 @@ p {
 
 /* GLOBAL MEDIA */
 
+/* MAKE ALL IMAGES SHRINK ON SMALL SCREENS */
 img {
-
-    /* MAKE ALL IMAGES SHRINK ON SMALL SCREENS */
     max-width: 100%;
     height: auto; /* ONLY WORKS WHEN IMG HTML HAS A WEIGHT AND HEIGHT SET */
 }
@@ -328,15 +321,14 @@ body {
         text-decoration: none;
     }
 
-
     /* SITE LOGO */
     .site-logo {
 
         /* PUT SITE LOGO CHILDREN SIDE-BY-SIDE AND CENTER*/
         display: flex;
         align-items: center;
-        gap: 1em;
         justify-content: center;
+        gap: 1em;
 
         /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
         h1 {
@@ -345,10 +337,16 @@ body {
             text-wrap: no-wrap;
         }
 
+        /* REMOVE THE SPACE UNDER THE LOGO MARK */
+        img, svg {
+            display: block;
+        }
+
+
     }
 
     /* SITE NAV */
-    .site-nav {
+    .site-header-nav {
 
         ul {
             /* REMOVE MARGINS & BULLETS FROM LIST */
@@ -367,110 +365,169 @@ body {
             padding: 1em;
         }
 
-        /* TOGGLE MENU */
-
-        /* HIDE MENU BUTTON IF NOT USING TOGGLE NAV */
-        .site-menu-button {
-            display: none;
-        }
-
-        &.toggle-menu {
-
-            display: flex;
-            flex-direction: row-reverse;
-            align-items: center;
-
-            /* SHOW MENU BUTTON IF USING TOGGLE NAV */
-            .site-menu-button {
-                display: block;
-                background-color: transparent;
-                border: 1px solid black;
-                padding: .5em; 
-                position: relative;
-                z-index: 100;
-
-                &:hover {
-                    cursor: pointer;
-                }
-
-            }
-
-            .site-menu {
-                position: fixed;
-                top: 0;
-                right: 0;
-                z-index: 50;
-                background-color: pink;
-                width: 100%;
-                min-height: 100svh;
-                flex-direction: column;
-                justify-content: center;
-                align-items: center;
-                font-size: 3vw;
-                transition: .4s all ease-out;
-
-                a {
-                    padding: 2vh 2vw;
-                }
-
-            }
-
-            &[data-menustate="open"] {
-
-                /* SET MENU BUTTON TO FIXED WHEN MENU IS OPEN */
-                .site-menu-button {
-                    position: fixed;
-                    z-index: 100;
-                }
-
-                /* SHOW THE SITE MENU WHEN OPEN */
-                .site-menu {
-                    transform: translateX(0);
-                }
-            }
-
-            &[data-menustate="closed"] {
-
-                /* MOVE THE SITE MENU TO THE RIGHT WHEN CLOSED */
-                .site-menu {
-                    transform: translateX(100%);
-                }
-            }
-        }
-
     }  
+}
 
-    /* IF TOGGLE MENU DISPLAY LOGO ON LEFT AND MENU ON RIGHT ON ALL SCREENS */
-    &:has(.toggle-menu) {
-        display: flex;
-        justify-content: space-between;
+
+/* TOGGLE MENU */
+
+/* HIDE MENU BUTTON IF NOT USING TOGGLE NAV */
+.site-menu-button {
+    display: none;
+}
+
+.toggle-menu {
+
+    /* SET TOGGLE MENU COLORS */
+    --color-togglemenu-background: green;
+    --color-togglemenu-text: yellow;
+
+
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    /* SHOW MENU BUTTON IF USING TOGGLE NAV */
+    .site-menu-button {
+        display: block;
+        background-color: transparent;
+        border: 1px solid var(--color-siteheader-links);
+        color: var(--color-siteheader-links);
+        padding: .5em; 
+        position: relative;
+        z-index: 100;
+        transition: .4s all ease-out;
+
+        /* RESET BUTTON FONT SIZE TO SAME AS SITE HEADER NAV */
+        font-size: inherit;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        /* ADD SUPPORT FOR NAVICON / HAMBURGER ICON */
+        &:has(svg) {
+
+            /* VERTICALLY ALIGN THE MENU TEXT W ICON */
+            display: flex;
+            align-content: center;
+            gap: var(--unit-small);
+
+            /* REMOVE BORDER */
+            border: none;
+
+            /* SET THE COLOR OF THE SVG TO MATCH */
+            svg {
+                fill: var(--color-siteheader-links);
+            }
+
+            /* ADD SUPPORT FOR SVG ANIMATION */
+            svg > * {
+                transition: .4s all ease-out;
+                transform-origin: center;
+            }
+
+        }
 
     }
 
+    .site-menu {
+
+        /* SET COLORS TO TOGGLE MENU COLORS */
+        background-color: var(--color-togglemenu-background);
+
+        position: fixed;
+        top: 0;
+        right: 0;
+        z-index: 50;
+        width: 100%;
+        min-height: 100svh;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 3vw;
+        transition: .4s all ease-out;
+
+        a {
+            color: var(--color-togglemenu-text);
+            padding: 2vh 2vw;
+        }
+
+    }
+
+    &[data-menustate="open"] {
+
+        /* CHANGE COLORS TO TOGGLE MENU COLORS */
+        --color-siteheader-links: var(--color-togglemenu-text);
+
+        /* SET MENU BUTTON TO FIXED WHEN MENU IS OPEN */
+        .site-menu-button {
+            position: fixed;
+            z-index: 100;
+        }
+
+        /* SHOW THE SITE MENU WHEN OPEN */
+        .site-menu {
+            transform: translateX(0);
+        }
+
+        /* ANIMATE THE NAVICON / HAMBURGER ICON */
+        /* ADD SUPPORT FOR NAVICON / HAMBURGER ICON */
+        .site-menu-button svg {
+            .simple-navicon-top {
+                width: 100%;
+                transform: translate(-21%, 24%) rotate(45deg);
+            }
+            .simple-navicon-middle {
+                opacity: 0;
+            }
+            .simple-navicon-bottom {
+                width: 100%;
+                transform: translate(-21%, -25%) rotate(-45deg);
+            }
+        }
+    }
+
+    &[data-menustate="closed"] {
+
+        /* MOVE THE SITE MENU TO THE RIGHT WHEN CLOSED */
+        .site-menu {
+            transform: translateX(100%);
+        }
+    }
 }
+
+/* IF TOGGLE MENU DISPLAY LOGO ON LEFT AND MENU ON RIGHT ON ALL SCREENS */
+.site-header:has(.toggle-menu) {
+    display: flex;
+    justify-content: space-between;
+
+    .site-logo {
+        position: relative;
+        z-index: 100;
+    }
+}
+
 
 /* PLACE SITE HEADER ON TOP OF HERO */
 .site-header.on-top-of-hero {
-
-    @media (min-width: 768px) {
 
     /* RENDER HEADER ON TOP OF HERO ON LARGE SCREENS*/
         position: absolute;
         width: 100%;
 
-        /* SET SITE HEADER LINK COLOR ON LARGE SCREENS*/
-        a {
-            color: var(--color-siteheader-links);
-        }
-
-        /* ADD MORE SPACE ON TOP FOR THE ABSOLUTE HEADER */
-        & + .site-main > .hero {
-            padding-top: calc(4em + var(--unit-large));
-        }
+    /* SET SITE HEADER LINK COLOR ON LARGE SCREENS*/
+    --color-siteheader-links: var(--color-hero-headings);
+    a {
+        color: var(--color-siteheader-links);
     }
 
-    
-}  
+    /* ADD MORE SPACE ON TOP FOR THE ABSOLUTE HEADER */
+    & + .site-main > .hero {
+        padding-top: calc(4em + var(--unit-large));
+    }
+
+}
 
 
 /* SITE MAIN */
@@ -487,6 +544,12 @@ section {
 .hero {
     background: var(--color-hero-background);
     color: var(--color-hero-text);
+
+    h1 {
+        font-size: 4em;
+        line-height: 1;
+        text-wrap: balance;
+    }
 
     h1, h2, h3 {
         color: var(--color-hero-headings);
@@ -514,7 +577,7 @@ section {
         }
     }
 
-    .site-nav {
+    .site-footer-nav {
         ul {
             list-style: none;
             margin: 0;
@@ -569,3 +632,12 @@ section {
     }
 
 }
+/* --------------- */
+/* -- ANIMATION -- */
+/* --------------- */
+
+/* ENABLE NATIVE SMOOTH SCROLLING */
+html {
+    scroll-behavior: smooth;
+}
+
