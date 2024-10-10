@@ -330,6 +330,11 @@ body {
         justify-content: center;
         gap: 1em;
 
+        /* PLACE LOGO ON TOP OF DRAWER MENU */
+        /* NOTE: LOGO WILL SCROLL AWAY - NEED TO ADD SUPPORT FOR FIXED LOGO */
+        /* position: relative; */
+        z-index: 100;
+
         /* REMOVE MARGINS AND RESIZE H1 INSIDE HEADER */
         h1 {
             font-size: 2em;
@@ -421,7 +426,7 @@ body {
                 fill: var(--color-siteheader-links);
             }
 
-            /* ADD SUPPORT FOR SVG ANIMATION */
+            /* ADD SUPPORT FOR SVG ANIMATION. THIS IS NESTED INSIDE A HAS SVG ELEMENT, AND THEN THE LINE BELOW CONVEYS ALL CHILDREN OF AN SVG */
             svg > * {
                 transition: .4s all ease-out;
                 transform-origin: center;
@@ -474,16 +479,19 @@ body {
         /* ANIMATE THE NAVICON / HAMBURGER ICON */
         /* ADD SUPPORT FOR NAVICON / HAMBURGER ICON */
         .site-menu-button svg {
+
             .simple-navicon-top {
                 width: 100%;
-                transform: translate(-21%, 24%) rotate(45deg);
+                translate: -21% 25%; 
+                rotate: 45deg;
             }
             .simple-navicon-middle {
                 opacity: 0;
             }
             .simple-navicon-bottom {
                 width: 100%;
-                transform: translate(-21%, -25%) rotate(-45deg);
+                rotate: -45deg;
+                translate: -21% -25%;
             }
         }
     }
@@ -531,8 +539,6 @@ body {
 
 
 /* SITE MAIN */
-.site-main {
-}
 
 /* SECTIONS */
 section {
